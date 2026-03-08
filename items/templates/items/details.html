@@ -1,39 +1,79 @@
-{% extends "base.html" %} {% block title %}Item Details{% endblock %}
+{% extends "base.html" %}
+{% block title %}Item Details{% endblock %}
+
 {% block content %}
 
-<h2 class="text-2xl font-semibold text-green-700 mb-4">{{ item.name }}</h2>
+<h2 class="text-xl font-semibold text-green-700 mb-6">
+    {{ item.name }}
+</h2>
 
-<div class="space-y-3">
-    <p><strong>Description:</strong> {{ item.description }}</p>
+<div class="space-y-4 border border-gray-200 rounded-lg p-6 bg-white">
 
-    <p><strong>Location:</strong> {{ item.location }}</p>
-
-    <p><strong>Date Found:</strong> {{ item.date_found }}</p>
-
-    <p><strong>Reported By:</strong> {{ item.found_by }}</p>
+<!-- Image -->
+<div class="overflow-hidden rounded">
+{% if item.image %}
+<img src="{{ item.image.url }}"
+     alt="{{ item.name }}"
+     class="w-full h-72 object-cover">
+{% else %}
+<div class="h-72 bg-gray-100 flex items-center justify-center text-gray-400 text-sm">
+No image available
+</div>
+{% endif %}
 </div>
 
-<div class="mt-6 space-x-3">
-    {% if item.found_by == request.user %}
-    <a
-        href="{% url 'items:update_item' item.id %}"
-        class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
-    >
-        Edit
-    </a>
-      <a
-        href="{% url 'items:delete_item' item.id %}"
-        class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-    >
-        Delete
-    </a>
-    {% endif %}
-    <a
-        href="{% url 'items:list_items' %}"
-        class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500"
-    >
-        Back
-    </a>
+<!-- Status -->
+<span class="text-xs px-2 py-1 rounded
+{% if item.status == 'claimed' %}
+bg-green-100 text-green-700
+{% else %}
+bg-yellow-100 text-yellow-700
+{% endif %}">
+{{ item.status|title }}
+</span>
+
+<!-- Post Type -->
+<span class="text-xs px-2 py-1 rounded
+{% if item.post_type == 'lost' %}
+bg-red-100 text-red-700
+{% else %}
+bg-blue-100 text-blue-700
+{% endif %}">
+{{ item.get_post_type_display }}
+</span>
+
+<div class="space-y-2 text-sm mt-3">
+
+<p><span class="font-medium">Description:</span> {{ item.description }}</p>
+<p><span class="font-medium">Location:</span> {{ item.location }}</p>
+<p><span class="font-medium">Date {{ item.post_type|title }}ed:</span> {{ item.date_found }}</p>
+<p><span class="font-medium">Posted By:</span> {{ item.found_by }}</p>
+
+</div>
+
+</div>
+
+<div class="mt-6 flex gap-3">
+
+{% if item.found_by == request.user %}
+
+<a href="{% url 'items:update_item' item.id %}"
+class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 text-sm">
+Edit
+</a>
+
+<a href="{% url 'items:delete_item' item.id %}"
+class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+Delete
+</a>
+
+{% endif %}
+
+<a href="{% url 'items:list_items' %}"
+class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 text-sm">
+Back
+</a>
+
 </div>
 
 {% endblock %}
