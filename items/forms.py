@@ -7,10 +7,10 @@ class ItemForm(forms.ModelForm):
         widget=forms.FileInput(
             attrs={
                 "class": (
-                    "w-full text-green-700 border border-gray-300 rounded-lg p-2 "
-                    "cursor-pointer file:bg-green-100 file:border-0 file:rounded file:px-4 "
-                    "file:py-2 file:text-green-700 file:font-semibold hover:file:bg-green-200 "
-                    "focus:outline-none focus:ring-2 focus:ring-green-400"
+                    "w-full text-amber-700 border border-gray-300 rounded-lg p-2 "
+                    "cursor-pointer file:bg-amber-100 file:border-0 file:rounded file:px-4 "
+                    "file:py-2 file:text-amber-700 file:font-semibold hover:file:bg-amber-200 "
+                    "focus:outline-none focus:ring-2 focus:ring-amber-400"
                 )
             }
         )
@@ -21,27 +21,27 @@ class ItemForm(forms.ModelForm):
         fields = ("name", "description", "date_found", "location", "status", "post_type", "image")
         widgets = {
             "name": forms.TextInput(attrs={
-                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-green-400",
+                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-amber-400",
                 "placeholder": "Item name"
             }),
             "description": forms.Textarea(attrs={
-                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-green-400",
+                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-amber-400",
                 "rows": 4,
                 "placeholder": "Describe the item"
             }),
             "location": forms.TextInput(attrs={
-                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-green-400",
+                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-amber-400",
                 "placeholder": "Location"
             }),
             "date_found": forms.DateInput(attrs={
                 "type": "date",
-                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-green-400"
+                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-amber-400"
             }),
             "status": forms.Select(attrs={
-                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-green-400"
+                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-amber-400"
             }),
             "post_type": forms.Select(attrs={
-                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-green-400"
+                "class": "w-full border border-gray-300 rounded p-2 focus:ring-2 focus:ring-amber-400"
             }),
         }
 
