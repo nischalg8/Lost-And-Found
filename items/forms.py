@@ -4,7 +4,7 @@ from .models import Item
 class ItemForm(forms.ModelForm):
     image = forms.ImageField(
         required=False,
-        widget=forms.ClearableFileInput(
+        widget=forms.FileInput(
             attrs={
                 "class": (
                     "w-full text-green-700 border border-gray-300 rounded-lg p-2 "
@@ -49,5 +49,6 @@ class ItemForm(forms.ModelForm):
         user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         # Only the user who posted can change status
-        if self.instance and self.instance.pk and self.instance.found_by != user:
+        if not self.instance.pk or self.instance.found_by != user:
             self.fields.pop('status', None)
+            
